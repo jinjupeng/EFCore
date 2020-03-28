@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Model;
+using Repository;
+using Service;
 
 namespace EFCore
 {
@@ -26,11 +28,13 @@ namespace EFCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddControllers();
             // 图片
             services.Configure<PictureOptions>(Configuration.GetSection("PictureOptions"));
             // 连接数据库
-            services.AddDbContext<EfCoreContext>(
+            services.AddDbContext<CoreNotesAutoFacContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 

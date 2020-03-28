@@ -6,16 +6,17 @@ using System.Reflection;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Model;
+using Repository.Base;
 using Utils;
 
 namespace Repository
 {
-    public class GenericRepository<TEntity> where TEntity : class
-    {
-        protected internal EfCoreContext Context;
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, new()
+	{
+        protected internal CoreNotesAutoFacContext Context;
         protected DbSet<TEntity> DbSet;
 
-        public GenericRepository(EfCoreContext context)
+        public BaseRepository(CoreNotesAutoFacContext context)
         {
             this.Context = context;
             DbSet = context.Set<TEntity>();
@@ -106,7 +107,7 @@ namespace Repository
 			{
 				DbSet.Add(entity);
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
 				throw;
 			}
