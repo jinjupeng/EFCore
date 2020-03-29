@@ -1,9 +1,9 @@
-﻿using Model;
+﻿using Models.Model;
 
 namespace Service
 {
 	public interface IStudentService
 	{
-		Student GetById(string id);
+		Student GetById(int id);
 	}
 }

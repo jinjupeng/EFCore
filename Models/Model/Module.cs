@@ -1,13 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Model
+namespace Models.Model
 {
+    [Table("Module")]
     public partial class Module
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public bool? IsDelete { get; set; }
         public int? ParentId { get; set; }
+
         public string Name { get; set; }
         public string LinkUrl { get; set; }
         public string Area { get; set; }

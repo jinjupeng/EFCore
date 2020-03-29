@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections;
 using Exceptions;
-using Model;
+using Models;
 
 namespace Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly CoreNotesAutoFacContext _context;
+        private readonly EfCoreContext _context;
 
-        public UnitOfWork(CoreNotesAutoFacContext context)
+        public UnitOfWork(EfCoreContext context)
         {
             _context = context;
         }

@@ -1,5 +1,5 @@
 ﻿using System;
-using Model;
+using Models.Model;
 using Repository;
 
 namespace Service
@@ -14,9 +14,9 @@ namespace Service
 			_unitOfWork = unitOfWork;
 		}
 
-		public Student GetById(string id)
+		public Student GetById(int id)
 		{
-			return _unitOfWork.StudentRepository.GetByID(id);
+			return _unitOfWork.StudentRepository.GetById(id);
 			// return _studentRepository.GetByID(id);
 		}
 	}

@@ -20,7 +20,7 @@ namespace Repository.Base
 		PaginatedList<TEntity> Paginate<TKey>(int pageIndex, int pageSize, Expression<Func<TEntity, TKey>> keySelector,
 			Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties);
 
-		TEntity GetByID(object id);
+		TEntity GetById(object id);
 		void Insert(TEntity entity);
 		void InsertRange(IEnumerable<TEntity> entities);
 		void Delete(object id);

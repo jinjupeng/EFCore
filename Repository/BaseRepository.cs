@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Model;
+using Models;
 using Repository.Base;
 using Utils;
 
@@ -13,10 +13,10 @@ namespace Repository
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, new()
 	{
-        protected internal CoreNotesAutoFacContext Context;
+        protected internal EfCoreContext Context;
         protected DbSet<TEntity> DbSet;
 
-        public BaseRepository(CoreNotesAutoFacContext context)
+        public BaseRepository(EfCoreContext context)
         {
             this.Context = context;
             DbSet = context.Set<TEntity>();
@@ -96,7 +96,7 @@ namespace Repository
 			return queryable.ToPaginatedList(pageIndex, pageSize);
 		}
 
-		public virtual TEntity GetByID(object id)
+		public virtual TEntity GetById(object id)
 		{
 			return DbSet.Find(id);
 		}

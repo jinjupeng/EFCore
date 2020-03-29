@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Exception\Exceptions.csproj" />
-    <ProjectReference Include="..\Model\Model.csproj" />
+    <ProjectReference Include="..\Models\Models.csproj" />
     <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>
 

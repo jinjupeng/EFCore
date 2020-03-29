@@ -1,11 +1,11 @@
-﻿using Model;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Models.Model;
 
-namespace Model
+namespace Models
 {
-    public partial class CoreNotesAutoFacContext : DbContext
+    public partial class EfCoreContext : DbContext
     {
-        public CoreNotesAutoFacContext()
+        public EfCoreContext()
         {
         }
 
@@ -13,7 +13,7 @@ namespace Model
         /// 创建数据库上下文
         /// </summary>
         /// <param name="options"></param>
-        public CoreNotesAutoFacContext(DbContextOptions<CoreNotesAutoFacContext> options)
+        public EfCoreContext(DbContextOptions<EfCoreContext> options)
             : base(options)
         {
         }

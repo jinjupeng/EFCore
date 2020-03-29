@@ -1,15 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Model
+namespace Models.Model
 {
-    public partial class RoleModulePermission
+    [Table("ModulePermission")]
+    public partial class ModulePermission
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public bool? IsDelete { get; set; }
-        public int RoleId { get; set; }
         public int ModuleId { get; set; }
-        public int? PermissionId { get; set; }
+        public int PermissionId { get; set; }
         public int? CreateId { get; set; }
         public string CreateBy { get; set; }
         public DateTime? CreateTime { get; set; }

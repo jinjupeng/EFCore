@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Model;
 using Service;
 
 namespace EFCore.Controllers
@@ -16,7 +15,7 @@ namespace EFCore.Controllers
 		}
 		public JsonResult Get()
 		{
-			var id = "236d37d4f3c14dd489b1c7270c7670ad";
+			var id = 1;
 			return new JsonResult(_student.GetById(id));
 		}
 	}
