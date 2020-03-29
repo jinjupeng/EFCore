@@ -8,23 +8,36 @@ namespace Exceptions
     {
         public BaseException()
         {
+            this._exceptionCode = 1000;
+            this._exceptionMessage = "";
         }
 
 
-        public BaseException(string message, System.Exception innerException) : base(message, innerException)
+        public BaseException(string errorMessage, System.Exception innerException) : base(errorMessage, innerException)
         {
         }
 
 
-        public BaseException(string message) : base(message)
+        public BaseException(string errorMessage) : base(errorMessage)
         {
+            this._exceptionCode = 1000;
+            this._exceptionMessage = errorMessage;
+        }
+        public BaseException(int errorCode, string errorMessage) : base(errorMessage)
+        {
+            this._exceptionCode = errorCode;
+            this._exceptionMessage = errorMessage;
         }
 
+        public BaseException(HttpStatusCode errorCode, string errorMessage) : base(errorMessage)
+        {
+            this._exceptionCode = (int)errorCode;
+            this._exceptionMessage = errorMessage;
+        }
 
         protected BaseException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
-
 
         public virtual int ExceptionCode
         {
@@ -40,18 +53,7 @@ namespace Exceptions
         }
 
 
-        public BaseException(int errorCode, string errorMessage) : base(errorMessage)
-        {
-            this._exceptionCode = errorCode;
-            this._exceptionMessage = errorMessage;
-        }
 
-
-        public BaseException(HttpStatusCode errorCode, string errorMessage) : base(errorMessage)
-        {
-            this._exceptionCode = (int)errorCode;
-            this._exceptionMessage = errorMessage;
-        }
 
 
         private readonly int _exceptionCode;

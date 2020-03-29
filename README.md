@@ -1,8 +1,25 @@
 # EFCore
 
-> Core3.1之EntityFramework框架学习
+> Core3.1之EntityFramework Core框架学习
 
 
+
+## Code-First
+
++ Add-Migration Init
+
++ update-database Init
+
+## DataBase-First
+
+
+
+## TODO
+
++ 全局异常过滤
++ 日志接口（Serilog）
++ Autofac替换微软内置IOC
++ ...
 
 ## 链接
 

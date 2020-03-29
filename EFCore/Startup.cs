@@ -1,3 +1,4 @@
+using EFCore.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,8 @@ namespace EFCore
             services.AddDbContext<EfCoreContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                     p => p.MigrationsAssembly("Models")));
+            // 自定义过滤器并捕获全局异常
+            services.AddMvc(options => { options.Filters.Add<BaseExceptionAttribute>(); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

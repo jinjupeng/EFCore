@@ -27,7 +27,11 @@ namespace Repository
             }
             catch (Exception ex)
             {
-                throw new Exception("出现异常1");
+                if (ex is BaseException ex2)
+                {
+                    throw ex2;
+                }
+                throw new Exception(ex.Message);
             }
 		}
 
