@@ -42,5 +42,26 @@ namespace EFCore.Controllers
 				ResponseData = _student.SaveStudent(student)
 			});
 		}
+
+		[HttpGet]
+		public JsonResult Update()
+		{
+			var student = _student.GetById(1);
+			student.Age = 28;
+			student.Name = "孙悟空";
+			return new JsonResult(new ResponseDataHelper2<Student>
+			{
+				ResponseData = _student.Update(student)
+			});
+		}
+
+		[HttpGet]
+		public JsonResult Delete()
+		{
+			return new JsonResult(new ResponseDataHelper2<Student>
+			{
+				ResponseData = _student.Delete(3)
+			});
+		}
 	}
 }

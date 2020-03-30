@@ -14,14 +14,13 @@ namespace Service
 
 		public Student GetById(int id)
 		{
-			if (id != 0)
+			if (id == 0)
 			{
-				// throw new BaseException(1234, "全局异常过滤测试"); // BaseException异常是可以返回前端让用户看到的
-				throw new BaseException();
+				throw new BaseException(1000, "全局异常过滤测试"); // BaseException异常是可以返回前端让用户看到的
+				// throw new BaseException();
 				// throw new Exception("全局异常过滤测试"); // Exception异常只能在日志中看到，禁止前端用户查看
 			}
 			return _unitOfWork.StudentRepository.GetById(id);
-			// return _studentRepository.GetByID(id);
 		}
 
 		public Student SaveStudent(Student student)
@@ -31,6 +30,21 @@ namespace Service
 			// 保存到数据库
 			_unitOfWork.Save();
 			return _unitOfWork.StudentRepository.GetById(student.Id);
+		}
+
+		public Student Update(Student student)
+		{
+			_unitOfWork.StudentRepository.Update(student);
+			_unitOfWork.Save();
+			return student;
+		}
+
+		public Student Delete(int id)
+		{
+			// 事务删除
+			_unitOfWork.Save(delegate { _unitOfWork.StudentRepository.Delete(id); });
+			
+			return _unitOfWork.StudentRepository.GetById(id);
 		}
 	}
 }
