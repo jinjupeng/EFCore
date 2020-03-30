@@ -1,6 +1,11 @@
-﻿using Exceptions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using Exceptions;
+using Models.DTO;
 using Models.Model;
 using Repository;
+using Utils;
 
 namespace Service
 {
@@ -23,28 +28,30 @@ namespace Service
 			return _unitOfWork.StudentRepository.GetById(id);
 		}
 
-		public Student SaveStudent(Student student)
+		public bool Insert(Student student)
 		{
 			// 插入一条数据，主键id自增加1，并返回给实体对象student
 			_unitOfWork.StudentRepository.Insert(student);
 			// 保存到数据库
-			_unitOfWork.Save();
-			return _unitOfWork.StudentRepository.GetById(student.Id);
+			return _unitOfWork.Save() > 0;
 		}
 
-		public Student Update(Student student)
+		public bool Update(Student student)
 		{
 			_unitOfWork.StudentRepository.Update(student);
-			_unitOfWork.Save();
-			return student;
+			return _unitOfWork.Save() > 0;
 		}
 
-		public Student Delete(int id)
+		public bool Delete(int id)
 		{
+			_unitOfWork.StudentRepository.Delete(id);
 			// 事务删除
-			_unitOfWork.Save(delegate { _unitOfWork.StudentRepository.Delete(id); });
-			
-			return _unitOfWork.StudentRepository.GetById(id);
+			return _unitOfWork.Save() > 0;
+		}
+
+		public PaginatedList<Student> GetList(int pageIndex, int pageSize, Expression<Func<Student, DateTime>> keySelector, Expression<Func<Student, bool>> predicate, params Expression<Func<Student, object>>[] includeProperties)
+		{
+			return _unitOfWork.StudentRepository.Paginate(pageIndex, pageSize, keySelector, predicate, includeProperties);
 		}
 	}
 }
