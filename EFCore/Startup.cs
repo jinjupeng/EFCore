@@ -1,4 +1,6 @@
 using System;
+using Autofac;
+using EFCore.Autofac;
 using EFCore.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,10 +28,9 @@ namespace EFCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IStudentService, StudentService>();
-            services.AddScoped<IStudentRepository, StudentRepository>();
-            services.AddControllers();
+            // services.AddScoped<IUnitOfWork, UnitOfWork>();
+            // services.AddScoped<IStudentService, StudentService>();
+            // services.AddScoped<IStudentRepository, StudentRepository>();
             // 图片
             services.Configure<PictureOptions>(Configuration.GetSection("PictureOptions"));
             // 连接数据库
@@ -56,6 +57,16 @@ namespace EFCore
 
             services.AddHealthChecks();
         }
+
+        #region AutoFac的DI实现
+
+        // This is the default if you don't have an environment specific method.
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            // Add things to the Autofac ContainerBuilder.
+            builder.RegisterModule(new AutofacModule());
+        }
+        #endregion
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
