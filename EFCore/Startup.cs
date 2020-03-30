@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Models;
 using Repository;
+using Serilog;
 using Service;
 
 namespace EFCore
@@ -72,6 +73,8 @@ namespace EFCore
                 c.RoutePrefix = string.Empty;
             });
             #endregion
+
+            app.UseSerilogRequestLogging();
 
             app.UseRouting();
 
