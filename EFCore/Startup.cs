@@ -53,6 +53,8 @@ namespace EFCore
                 });
             });
             #endregion
+
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,6 +75,8 @@ namespace EFCore
                 c.RoutePrefix = string.Empty;
             });
             #endregion
+
+            app.UseHealthChecks("/health");
 
             app.UseSerilogRequestLogging();
 
