@@ -13,6 +13,7 @@ namespace EFCore.Controllers
 		{
 			_student = student;
 		}
+		[HttpGet]
 		public JsonResult Get()
 		{
 			var id = 1;

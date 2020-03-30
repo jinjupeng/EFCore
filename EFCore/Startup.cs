@@ -1,3 +1,4 @@
+using System;
 using EFCore.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -5,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Models;
 using Repository;
 using Service;
@@ -35,6 +37,21 @@ namespace EFCore
                     p => p.MigrationsAssembly("Models")));
             // 自定义过滤器并捕获全局异常
             services.AddMvc(options => { options.Filters.Add<BaseExceptionAttribute>(); });
+
+            services.AddControllers();
+
+            #region Swagger UI
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1.1.0",
+                    Title = "EFCore",
+                    Description = "Api Server",
+                    Contact = new OpenApiContact { Name = "jinjupeng", Email = "2365697576@qq.com", Url = new Uri("https://github.com/jinjupeng") }
+                });
+            });
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +61,17 @@ namespace EFCore
             {
                 app.UseDeveloperExceptionPage();
             }
+            #region Swagger
+            // 启动中间件服务生成Swagger作为JSON的终结点
+            app.UseSwagger();
+            // 启用中间件服务对swagger ui，指定Swagger JSON终结点
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiHelp V1");
+                // http://localhost:<port>/
+                c.RoutePrefix = string.Empty;
+            });
+            #endregion
 
             app.UseRouting();
 

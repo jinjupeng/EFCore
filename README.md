@@ -19,6 +19,7 @@
 + 全局异常过滤
 + 日志接口（Serilog）
 + Autofac替换微软内置IOC
++ 配置Swagger UI
 + ...
 
 ## 链接
