@@ -8,8 +8,6 @@ namespace Exceptions
     {
         public BaseException()
         {
-            this._exceptionCode = 1000;
-            this._exceptionMessage = "";
         }
 
 

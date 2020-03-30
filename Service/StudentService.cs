@@ -1,5 +1,4 @@
-﻿using System;
-using Exceptions;
+﻿using Exceptions;
 using Models.Model;
 using Repository;
 
@@ -23,6 +22,15 @@ namespace Service
 			}
 			return _unitOfWork.StudentRepository.GetById(id);
 			// return _studentRepository.GetByID(id);
+		}
+
+		public Student SaveStudent(Student student)
+		{
+			// 插入一条数据，主键id自增加1，并返回给实体对象student
+			_unitOfWork.StudentRepository.Insert(student);
+			// 保存到数据库
+			_unitOfWork.Save();
+			return _unitOfWork.StudentRepository.GetById(student.Id);
 		}
 	}
 }

@@ -1,15 +1,23 @@
-﻿namespace Utils
+﻿using System;
+using System.Xml.Serialization;
+
+namespace Utils
 {
-
-	public class ResponseDataHelper
+	[XmlRoot("ResponseData")]
+	[Serializable]
+	public class ResponseDataHelper2<T>
 	{
-
-		public ResponseDataHelper()
+		public ResponseDataHelper2()
 		{
 			this._responseCode = 0;
 			this._responseMessage = "操作成功";
 		}
 
+		public PagerHelper PagerData { get; set; }
+
+		public object PagerSummary { get; set; }
+
+		public T ResponseData { get; set; }
 		public int ResponseCode
 		{
 			get

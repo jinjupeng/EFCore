@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using Exceptions;
 using Models;
 
@@ -27,10 +26,6 @@ namespace Repository
             }
             catch (Exception ex)
             {
-                if (ex is BaseException ex2)
-                {
-                    throw ex2;
-                }
                 throw new Exception(ex.Message);
             }
 		}
