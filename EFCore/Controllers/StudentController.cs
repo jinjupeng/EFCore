@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Models.Model;
@@ -19,6 +20,7 @@ namespace EFCore.Controllers
 		}
 
 		[HttpGet]
+		[Description("查询学生信息")]
 		public JsonResult Get(int id)
 		{
 			return new JsonResult(new ResponseDataHelper2<Student>
@@ -28,6 +30,7 @@ namespace EFCore.Controllers
 		}
 
 		[HttpPost]
+		[Description("新增学生信息")]
 		public JsonResult Add(Student student)
 		{
 			var result = "";
@@ -46,6 +49,7 @@ namespace EFCore.Controllers
 		}
 
 		[HttpPost]
+		[Description("更新学生信息")]
 		public JsonResult Update(Student student)
 		{
 			var result = "";
@@ -63,6 +67,7 @@ namespace EFCore.Controllers
 		}
 
 		[HttpPost]
+		[Description("新增或更新学生信息")]
 		public JsonResult CreateOrUpdate(Student student)
 		{
 			var result = "";
@@ -86,6 +91,7 @@ namespace EFCore.Controllers
 		}
 
 		[HttpDelete]
+		[Description("删除学生信息")]
 		public JsonResult Delete(int id)
 		{
 			return new JsonResult(new ResponseDataHelper2<string>

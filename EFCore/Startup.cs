@@ -1,6 +1,7 @@
 using System;
 using Autofac;
 using EFCore.Autofac;
+using EFCore.Extensions;
 using EFCore.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,34 +29,15 @@ namespace EFCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddScoped<IUnitOfWork, UnitOfWork>();
-            // services.AddScoped<IStudentService, StudentService>();
-            // services.AddScoped<IStudentRepository, StudentRepository>();
-            // 图片
+            // 读取图片配置信息
             services.Configure<PictureOptions>(Configuration.GetSection("PictureOptions"));
-            // 连接数据库
+            // 配置数据库连接信息
             services.AddDbContext<EfCoreContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                     p => p.MigrationsAssembly("Models")));
-            // 自定义过滤器并捕获全局异常
-            services.AddMvc(options => { options.Filters.Add<BaseExceptionAttribute>(); });
 
-            services.AddControllers();
-
-            #region Swagger UI
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1.1.0",
-                    Title = "EFCore",
-                    Description = "Api Server",
-                    Contact = new OpenApiContact { Name = "jinjupeng", Email = "2365697576@qq.com", Url = new Uri("https://github.com/jinjupeng") }
-                });
-            });
-            #endregion
-
-            services.AddHealthChecks();
+            // 扩展类创建静态方法
+            services.ServiceConfigure();
         }
 
         #region AutoFac的DI实现
