@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using Exceptions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Model;
 using Service;
@@ -10,6 +11,7 @@ namespace EFCore.Controllers
 {
 	[ApiController]
 	[Route("[controller]/[action]")]
+	[Filters.UserAuthorizeAttribute(Filters.AuthorizeLevel.Low)]
 	public class StudentController : ControllerBase
 	{
 		private readonly IStudentService _student;
