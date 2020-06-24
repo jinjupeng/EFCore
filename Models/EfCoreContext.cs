@@ -19,12 +19,12 @@ namespace Models
         }
 
         public virtual DbSet<Module> Module { get; set; }
-        public virtual DbSet<ModulePermission> ModulePermission { get; set; }
-        public virtual DbSet<Permission> Permission { get; set; }
+        public virtual DbSet<ModuleMenu> ModuleMenu { get; set; }
+        public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<Role> Role { get; set; }
-        public virtual DbSet<RoleModulePermission> RoleModulePermission { get; set; }
+        public virtual DbSet<RoleModuleMenu> RoleModuleMenu { get; set; }
         public virtual DbSet<Student> Student { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<UserInfo> UserInfo { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Models
 
                 entity.Property(e => e.Controller).IsUnicode(false);
 
-                entity.Property(e => e.CreateBy)
+                entity.Property(e => e.CreateName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -73,39 +73,39 @@ namespace Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.LinkUrl)
+                entity.Property(e => e.Url)
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ModifyBy)
+                entity.Property(e => e.UpdateName)
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ModifyTime).HasColumnType("datetime");
+                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<ModulePermission>(entity =>
+            modelBuilder.Entity<ModuleMenu>(entity =>
             {
-                entity.Property(e => e.CreateBy)
+                entity.Property(e => e.CreateName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.CreateTime).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifyBy)
+                entity.Property(e => e.UpdateName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ModifyTime).HasColumnType("datetime");
+                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<Permission>(entity =>
+            modelBuilder.Entity<Menu>(entity =>
             {
-                entity.Property(e => e.CreateBy)
+                entity.Property(e => e.CreateName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -119,26 +119,26 @@ namespace Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Mid).HasComment("接口id");
+                entity.Property(e => e.ModuleId).HasComment("接口id");
 
-                entity.Property(e => e.ModifyBy)
+                entity.Property(e => e.UpdateName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ModifyTime).HasColumnType("datetime");
+                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Path)
+                entity.Property(e => e.Url)
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
 
             modelBuilder.Entity<Role>(entity =>
             {
-                entity.Property(e => e.CreateBy)
+                entity.Property(e => e.CreateName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -148,30 +148,30 @@ namespace Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ModifyBy)
+                entity.Property(e => e.UpdateName)
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ModifyTime).HasColumnType("datetime");
+                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
 
                 entity.Property(e => e.RoleName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<RoleModulePermission>(entity =>
+            modelBuilder.Entity<RoleModuleMenu>(entity =>
             {
-                entity.Property(e => e.CreateBy)
+                entity.Property(e => e.CreateName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.CreateTime).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifyBy)
+                entity.Property(e => e.UpdateName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ModifyTime).HasColumnType("datetime");
+                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<Student>(entity =>
@@ -199,7 +199,7 @@ namespace Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<User>(entity =>
+            modelBuilder.Entity<UserInfo>(entity =>
             {
                 entity.Property(e => e.Address)
                     .HasMaxLength(200)
@@ -215,11 +215,11 @@ namespace Models
                     .HasMaxLength(60)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Pwd)
+                entity.Property(e => e.Password)
                     .HasMaxLength(60)
                     .IsUnicode(false);
 
-                entity.Property(e => e.RealName)
+                entity.Property(e => e.TrueName)
                     .HasMaxLength(60)
                     .IsUnicode(false);
 
@@ -230,17 +230,17 @@ namespace Models
 
             modelBuilder.Entity<UserRole>(entity =>
             {
-                entity.Property(e => e.CreateBy)
+                entity.Property(e => e.CreateName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.CreateTime).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifyBy)
+                entity.Property(e => e.UpdateName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ModifyTime).HasColumnType("datetime");
+                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -31,10 +31,10 @@ namespace EFCore
         {
             // 读取图片配置信息
             services.Configure<PictureOptions>(Configuration.GetSection("PictureOptions"));
-            // 配置数据库连接信息
+            // 配置数据库连接信息;如果DBContext和启动程序不在一个程序集，需要指定要迁移的程序集
             services.AddDbContext<EfCoreContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-                    p => p.MigrationsAssembly("Models")));
+                    p => p.MigrationsAssembly("EFCore")));
 
             // 扩展类创建静态方法
             services.ServiceConfigure();

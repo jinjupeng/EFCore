@@ -4,20 +4,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Model
 {
-    [Table("ModulePermission")]
-    public partial class ModulePermission
+    public partial class RoleModuleMenu
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public bool? IsDelete { get; set; }
+        public bool? IsDeleted { get; set; }
+        public int RoleId { get; set; }
         public int ModuleId { get; set; }
-        public int PermissionId { get; set; }
+        public int? MenuId { get; set; }
         public int? CreateId { get; set; }
-        public string CreateBy { get; set; }
+        public string CreateName { get; set; }
         public DateTime? CreateTime { get; set; }
-        public int? ModifyId { get; set; }
-        public string ModifyBy { get; set; }
-        public DateTime? ModifyTime { get; set; }
+        public int? UpdateId { get; set; }
+        public string UpdateName { get; set; }
+        public DateTime? UpdateTime { get; set; }
     }
 }

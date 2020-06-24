@@ -3,23 +3,97 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Models;
 
-namespace Models.Migrations
+namespace EFCore.Migrations
 {
     [DbContext(typeof(EfCoreContext))]
-    [Migration("20200329072754_Init")]
-    partial class Init
+    partial class EfCoreContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3")
+                .HasAnnotation("ProductVersion", "3.1.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Models.Model.Menu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CreateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreateName")
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50)
+                        .IsUnicode(false);
+
+                    b.Property<DateTime?>("CreateTime")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100)
+                        .IsUnicode(false);
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100)
+                        .IsUnicode(false);
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsHide")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsMenu")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ModuleId")
+                        .HasColumnType("int")
+                        .HasComment("接口id");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50)
+                        .IsUnicode(false);
+
+                    b.Property<int>("OrderSort")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UpdateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UpdateName")
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50)
+                        .IsUnicode(false);
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50)
+                        .IsUnicode(false);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Menu");
+                });
 
             modelBuilder.Entity("Models.Model.Module", b =>
                 {
@@ -45,13 +119,13 @@ namespace Models.Migrations
                         .HasColumnType("varchar(max)")
                         .IsUnicode(false);
 
-                    b.Property<string>("CreateBy")
+                    b.Property<int?>("CreateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreateName")
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50)
                         .IsUnicode(false);
-
-                    b.Property<int?>("CreateId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime");
@@ -69,27 +143,11 @@ namespace Models.Migrations
                         .HasMaxLength(100)
                         .IsUnicode(false);
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsMenu")
                         .HasColumnType("bit");
-
-                    b.Property<string>("LinkUrl")
-                        .HasColumnType("varchar(100)")
-                        .HasMaxLength(100)
-                        .IsUnicode(false);
-
-                    b.Property<string>("ModifyBy")
-                        .HasColumnType("varchar(100)")
-                        .HasMaxLength(100)
-                        .IsUnicode(false);
-
-                    b.Property<int?>("ModifyId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifyTime")
-                        .HasColumnType("datetime");
 
                     b.Property<string>("Name")
                         .HasColumnType("varchar(50)")
@@ -102,25 +160,41 @@ namespace Models.Migrations
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UpdateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UpdateName")
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100)
+                        .IsUnicode(false);
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100)
+                        .IsUnicode(false);
+
                     b.HasKey("Id");
 
                     b.ToTable("Module");
                 });
 
-            modelBuilder.Entity("Models.Model.ModulePermission", b =>
+            modelBuilder.Entity("Models.Model.ModuleMenu", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CreateBy")
+                    b.Property<int?>("CreateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreateName")
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50)
                         .IsUnicode(false);
-
-                    b.Property<int?>("CreateId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime");
@@ -128,102 +202,26 @@ namespace Models.Migrations
                     b.Property<bool?>("IsDelete")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ModifyBy")
-                        .HasColumnType("varchar(50)")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
-
-                    b.Property<int?>("ModifyId")
+                    b.Property<int>("MenuId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifyTime")
-                        .HasColumnType("datetime");
 
                     b.Property<int>("ModuleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PermissionId")
+                    b.Property<int?>("UpdateId")
                         .HasColumnType("int");
+
+                    b.Property<string>("UpdateName")
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50)
+                        .IsUnicode(false);
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ModulePermission");
-                });
-
-            modelBuilder.Entity("Models.Model.Permission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreateBy")
-                        .HasColumnType("varchar(50)")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
-
-                    b.Property<int?>("CreateId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("CreateTime")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("varchar(100)")
-                        .HasMaxLength(100)
-                        .IsUnicode(false);
-
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Icon")
-                        .HasColumnType("varchar(100)")
-                        .HasMaxLength(100)
-                        .IsUnicode(false);
-
-                    b.Property<bool>("IsButton")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsHide")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Mid")
-                        .HasColumnType("int")
-                        .HasComment("接口id");
-
-                    b.Property<string>("ModifyBy")
-                        .HasColumnType("varchar(50)")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
-
-                    b.Property<int?>("ModifyId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifyTime")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("varchar(50)")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
-
-                    b.Property<int>("OrderSort")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Path")
-                        .HasColumnType("varchar(50)")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
-
-                    b.Property<int>("Pid")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Permission");
+                    b.ToTable("ModuleMenu");
                 });
 
             modelBuilder.Entity("Models.Model.Role", b =>
@@ -233,13 +231,13 @@ namespace Models.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CreateBy")
+                    b.Property<int?>("CreateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreateName")
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50)
                         .IsUnicode(false);
-
-                    b.Property<int?>("CreateId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime");
@@ -252,19 +250,8 @@ namespace Models.Migrations
                     b.Property<bool>("Enabled")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<string>("ModifyBy")
-                        .HasColumnType("varchar(255)")
-                        .HasMaxLength(255)
-                        .IsUnicode(false);
-
-                    b.Property<int?>("ModifyId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifyTime")
-                        .HasColumnType("datetime");
 
                     b.Property<int>("OrderSort")
                         .HasColumnType("int");
@@ -274,63 +261,76 @@ namespace Models.Migrations
                         .HasMaxLength(50)
                         .IsUnicode(false);
 
+                    b.Property<int?>("UpdateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UpdateName")
+                        .HasColumnType("varchar(255)")
+                        .HasMaxLength(255)
+                        .IsUnicode(false);
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime");
+
                     b.HasKey("Id");
 
                     b.ToTable("Role");
                 });
 
-            modelBuilder.Entity("Models.Model.RoleModulePermission", b =>
+            modelBuilder.Entity("Models.Model.RoleModuleMenu", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CreateBy")
+                    b.Property<int?>("CreateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreateName")
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50)
                         .IsUnicode(false);
-
-                    b.Property<int?>("CreateId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime");
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ModifyBy")
-                        .HasColumnType("varchar(50)")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
-
-                    b.Property<int?>("ModifyId")
+                    b.Property<int?>("MenuId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifyTime")
-                        .HasColumnType("datetime");
 
                     b.Property<int>("ModuleId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PermissionId")
                         .HasColumnType("int");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UpdateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UpdateName")
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50)
+                        .IsUnicode(false);
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime");
+
                     b.HasKey("Id");
 
-                    b.ToTable("RoleModulePermission");
+                    b.ToTable("RoleModuleMenu");
                 });
 
             modelBuilder.Entity("Models.Model.Student", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(32)")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasMaxLength(32)
-                        .IsUnicode(false);
+                        .IsUnicode(false)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("Age")
                         .HasColumnType("int");
@@ -367,7 +367,7 @@ namespace Models.Migrations
                     b.ToTable("Student");
                 });
 
-            modelBuilder.Entity("Models.Model.User", b =>
+            modelBuilder.Entity("Models.Model.UserInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -391,7 +391,7 @@ namespace Models.Migrations
                     b.Property<int>("ErrorCount")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("LastErrTime")
@@ -402,12 +402,7 @@ namespace Models.Migrations
                         .HasMaxLength(60)
                         .IsUnicode(false);
 
-                    b.Property<string>("Pwd")
-                        .HasColumnType("varchar(60)")
-                        .HasMaxLength(60)
-                        .IsUnicode(false);
-
-                    b.Property<string>("RealName")
+                    b.Property<string>("Password")
                         .HasColumnType("varchar(60)")
                         .HasMaxLength(60)
                         .IsUnicode(false);
@@ -416,18 +411,35 @@ namespace Models.Migrations
                         .HasColumnType("varchar(max)")
                         .IsUnicode(false);
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RoleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Salt")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Sex")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrueName")
+                        .HasColumnType("varchar(60)")
+                        .HasMaxLength(60)
+                        .IsUnicode(false);
+
                     b.Property<DateTime>("UpdateTime")
                         .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("UserInfo");
                 });
 
             modelBuilder.Entity("Models.Model.UserRole", b =>
@@ -437,33 +449,33 @@ namespace Models.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CreateBy")
+                    b.Property<int?>("CreateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreateName")
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50)
                         .IsUnicode(false);
-
-                    b.Property<int?>("CreateId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime");
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ModifyBy")
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UpdateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UpdateName")
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50)
                         .IsUnicode(false);
 
-                    b.Property<int?>("ModifyId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifyTime")
+                    b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
